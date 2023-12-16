@@ -24,7 +24,11 @@
                 <DataTemplate DataType="{x:Type viewmodels:ContactAddViewModel}">
                     <views:ContactAddView/>
                 </DataTemplate>
-                
+
+                <DataTemplate DataType="{x:Type viewmodels:ContactUpdateViewModel}">
+                    <views:ContactUpdateView/>
+                </DataTemplate>
+
             </ContentControl.Resources>
         </ContentControl>
     </Grid>

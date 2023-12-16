@@ -26,6 +26,8 @@ namespace ContactBookWpf
                     services.AddTransient<ContactAddView>();
                     services.AddTransient<ContactAddViewModel>();
                     services.AddSingleton<FileService>();
+                    services.AddTransient<ContactUpdateViewModel>();
+                    services.AddTransient<ContactUpdateView>();
                 })
                 .Build();
 

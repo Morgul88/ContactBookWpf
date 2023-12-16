@@ -15,7 +15,7 @@ public partial class ContactListViewModel : ObservableObject
     private readonly ContactServices _contactService;
 
     [ObservableProperty]
-    private ObservableCollection<Contacts> _contactList = new ObservableCollection<Contacts>();
+    private ObservableCollection<Contacts> _contactList = [];
 
     public ContactListViewModel(IServiceProvider sp, ContactServices contactService)
     {
@@ -63,6 +63,12 @@ public partial class ContactListViewModel : ObservableObject
            
         }
         
+    }
+    [RelayCommand]
+    public void UpdateContact(Contacts contact)
+    {
+        var mainViewModel = _sp.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactUpdateViewModel>();
     }
     
 }

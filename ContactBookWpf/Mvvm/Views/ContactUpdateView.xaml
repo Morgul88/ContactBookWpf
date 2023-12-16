@@ -1,0 +1,37 @@
+﻿<UserControl x:Class="ContactBookWpf.Mvvm.Views.ContactUpdateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ContactBookWpf.Mvvm.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+
+        </Grid.RowDefinitions>
+
+        <StackPanel Grid.Row="0">
+            <Label Content="Update Contact" FontWeight="Bold" FontSize="20"/>
+            
+        </StackPanel>
+        <StackPanel Grid.Row="1" Margin="0,0,0,20">
+            <Label Content="First Name:"  FontSize="15px"/>
+            <TextBox x:Name="Input_Name" Text="{Binding ContactForm.FirstName}" Padding="8" Margin="0,0,0,10"  />
+            <Label Content="Last Name:"  FontSize="15px"/>
+            <TextBox Text="{Binding ContactForm.LastName}" Padding="8" Margin="0,0,0,10"/>
+            <Label Content="Phone:"  FontSize="15px"/>
+            <TextBox Text="{Binding ContactForm.PhoneNumber}" Padding="8" Margin="0,0,0,10"/>
+            <Label Content="E-Mail:"  FontSize="15px"/>
+            <TextBox Text="{Binding ContactForm.Email}" Padding="8" Margin="0,0,0,10"/>
+            <Label Content="Adress:"  FontSize="15px"/>
+            <TextBox Text="{Binding ContactForm.HomeAdress}" Padding="8" Margin="0,0,0,30"/>
+
+            <Button Content="Update Contact" Command="{Binding AddContactToListCommand}" Padding="15" Margin="0,0,0,10" />
+        </StackPanel>
+
+    </Grid>
+</UserControl>

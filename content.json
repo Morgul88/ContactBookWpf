@@ -1,1 +1,1 @@
-[]
+[{"$type":"ContactBookWpf.Mvvm.Models.Contacts, ContactBookWpf","Email":"Erik@gmail.com","FirstName":"Erik","LastName":"Starander","HomeAdress":"Lindome","PhoneNumber":"07333333","Id":"6097d3e4-969e-4016-82b3-88ee6c13f0b7"},{"$type":"ContactBookWpf.Mvvm.Models.Contacts, ContactBookWpf","Email":"Henrik@gmail.com","FirstName":"HEnrik","LastName":"Starander","HomeAdress":"Frillesås","PhoneNumber":"0743545344","Id":"9ae08005-edd2-439a-bcc3-631c3e6db42d"}]

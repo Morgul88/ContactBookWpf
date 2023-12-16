@@ -29,7 +29,8 @@ public partial class ContactAddViewModel: ObservableObject
     public void AddContactToList()
     {
         _contactService.AddContact(ContactForm);
-        
+        var mainViewModel = _sp.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = _sp.GetService<ContactListViewModel>();
     }
     [RelayCommand]
     public void NavigateToList()
