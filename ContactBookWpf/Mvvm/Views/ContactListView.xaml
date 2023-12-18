@@ -23,9 +23,7 @@
             <Button Content="Save List" Margin="5,10" Command="{Binding SaveFileToFolderCommand}" Padding="8" Background="LightGreen"/>
             <Button Content="Get List" Margin="5,10" Command="{Binding GetContactsFromFileCommand}" Padding="8"/>
 
-            <Label Content="Write Email to show Contact:" />
-            <TextBox x:Name="Input_Contact" Margin="5,0,5,0" Height="30" Background="LightYellow" TextAlignment="Center"/>
-            <Button Content="Show Contact" Margin="5,0,5,20" CommandParameter="{Binding ElementName=Input_Contact, Path=Text}" Padding="8" Command="{Binding ShowContactCommand}"/>
+            
 
             
         </StackPanel>
@@ -35,23 +33,24 @@
                      <DataTemplate>
                          <Grid >
                              <Grid.ColumnDefinitions>
-                                 <ColumnDefinition Width="auto"/>
                                  <ColumnDefinition Width="*"/>
-                                 
+                                 <ColumnDefinition Width="*"/>
+                                    <ColumnDefinition Width="*"/>
                         </Grid.ColumnDefinitions>
 
                              <StackPanel Grid.Column="0" Margin="5" HorizontalAlignment="Left">
-                                 <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
-                                 <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
-                                 <TextBlock Text="{Binding PhoneNumber}" />
-                                 <TextBlock Text="{Binding Email}" />
-                                 <TextBlock Text="{Binding HomeAdress}" />
-                                 
-                             </StackPanel>
-
+                                 <TextBlock Text="{Binding FirstName}" FontWeight="Bold" Margin="5" />
+                                <TextBlock Text="{Binding LastName}" FontWeight="Bold" Margin="5" />
+                                <TextBlock Text="{Binding PhoneNumber}" Margin="5" />
+                                 <TextBlock Text="{Binding Email}" Margin="5" />
+                                 <TextBlock Text="{Binding HomeAdress}" Margin="5" />
+                               
+                              </StackPanel>
+                            
                                <StackPanel Grid.Column="2" >
-                                     <Button CommandParameter="{Binding .}" Command="{Binding DataContext.UpdateContactCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"   Width="70" Height="25" Grid.Column="1" Content="Update" HorizontalAlignment="Right" Margin="10" />
-                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.RemoveContactCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"   Width="25" Height="25" Grid.Column="1" Content="X" HorizontalAlignment="Right" Margin="10" />
+                                     <Button CommandParameter="{Binding .}" Command="{Binding DataContext.ShowContactCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"   Width="70" Height="25" Grid.Column="1" Content="View" HorizontalAlignment="Right" Margin="10" />
+                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.UpdateContactCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"   Width="70" Height="25" Grid.Column="1" Content="Update" HorizontalAlignment="Right" Margin="10" />
+                                    <Button CommandParameter="{Binding .}" Command="{Binding DataContext.RemoveContactCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"   Width="70" Height="25" Grid.Column="1" Content="Delete" HorizontalAlignment="Right" Margin="10" />
                                </StackPanel>
 
 

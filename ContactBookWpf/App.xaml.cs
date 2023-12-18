@@ -28,6 +28,8 @@ namespace ContactBookWpf
                     services.AddSingleton<FileService>();
                     services.AddTransient<ContactUpdateViewModel>();
                     services.AddTransient<ContactUpdateView>();
+                    services.AddTransient<ContactPersonView>();
+                    services.AddTransient<ContactPersonViewModel>();
                 })
                 .Build();
 

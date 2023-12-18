@@ -26,9 +26,10 @@ public class ContactServices
             
         }
     }
+    
     public void GetFileFromComp()
     {
-        ObservableCollection<Contacts> contacts = new();
+        
 
         // Hämta info från filen på datorn
         var content = _fileService.GetContentFromFile();
@@ -68,8 +69,9 @@ public class ContactServices
 
         return contacts;
     }
-
     
+
+
 
     public ObservableCollection<Contacts> ViewOneContact(string mail)
     {

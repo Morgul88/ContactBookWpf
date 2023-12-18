@@ -4,8 +4,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ContactBookWpf.Mvvm.Views"
+             xmlns:viewmodels="clr-namespace:ContactBookWpf.Mvvm.ViewModels"
+             d:DataContext="{d:DesignInstance Type=viewmodels:ContactUpdateViewModel}"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    
     <Grid>
 
         <Grid.RowDefinitions>
@@ -30,7 +33,7 @@
             <Label Content="Adress:"  FontSize="15px"/>
             <TextBox Text="{Binding ContactForm.HomeAdress}" Padding="8" Margin="0,0,0,30"/>
 
-            <Button Content="Update Contact" Command="{Binding AddContactToListCommand}" Padding="15" Margin="0,0,0,10" />
+            <Button Content="Update Contact" Command="{Binding GoToListCommand}" Padding="15" Margin="0,0,0,10" />
         </StackPanel>
 
     </Grid>

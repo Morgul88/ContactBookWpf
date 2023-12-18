@@ -12,7 +12,7 @@
         mc:Ignorable="d"
         Background="White"
         WindowStartupLocation="CenterScreen"
-        Title="AdressBook" Height="800" Width="400">
+        Title="AdressBook" Height="800" Width="600">
     <Grid Margin="15">
         <ContentControl Content="{Binding CurrentViewModel}">
             <ContentControl.Resources>
@@ -27,6 +27,10 @@
 
                 <DataTemplate DataType="{x:Type viewmodels:ContactUpdateViewModel}">
                     <views:ContactUpdateView/>
+                </DataTemplate>
+
+                <DataTemplate DataType="{x:Type viewmodels:ContactPersonViewModel}">
+                    <views:ContactPersonView/>
                 </DataTemplate>
 
             </ContentControl.Resources>

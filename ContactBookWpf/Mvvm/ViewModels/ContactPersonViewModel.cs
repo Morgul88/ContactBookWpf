@@ -9,35 +9,50 @@ using System.Collections.ObjectModel;
 
 namespace ContactBookWpf.Mvvm.ViewModels;
 
-public partial class ContactUpdateViewModel: ObservableObject
+public partial class ContactPersonViewModel: ObservableObject
 {
-    private readonly IServiceProvider _sp;
+    
+    [ObservableProperty]
+    private ObservableCollection<Contacts> _secondList = [];
+    
     private readonly ContactServices _contactService;
 
-    [ObservableProperty]
-    private Contacts _contactForm = new();
-    public ContactUpdateViewModel(IServiceProvider sp,ContactServices contactServices)
+    private readonly IServiceProvider _sp;
+
+    public ContactPersonViewModel(IServiceProvider sp, ContactServices contactServices)
     {
         _sp = sp;
-
         _contactService = contactServices;
+        
+
+
     }
-    
-    
-    
     [RelayCommand]
-    public void GoToList()
+    public void NavigateToList()
     {
+        
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactListViewModel>();
+        
     }
-    public void Initialize(Contacts existingContact)
+    
+    [RelayCommand]
+    public void ShowContactOnViewList(Contacts contact)
     {
-        ContactForm = existingContact;
+        SecondList.Clear(); // Rensa listan innan du lägger till den nya kontakten
+        SecondList.Add(contact); // Lägg till den valda kontakten
     }
-    
-    
-    
-    
-}
 
+
+
+
+
+
+
+
+
+
+
+
+
+}

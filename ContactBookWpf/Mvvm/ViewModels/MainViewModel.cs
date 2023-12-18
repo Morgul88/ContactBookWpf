@@ -16,7 +16,7 @@ public partial class MainViewModel : ObservableObject
     public MainViewModel(IServiceProvider sp)
     {
         _sp = sp;
-        CurrentViewModel = _sp.GetRequiredService<ContactAddViewModel>();
+        CurrentViewModel = _sp.GetRequiredService<ContactListViewModel>();
         
         
     }

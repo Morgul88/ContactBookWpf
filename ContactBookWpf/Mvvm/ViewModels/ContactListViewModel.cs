@@ -13,32 +13,37 @@ public partial class ContactListViewModel : ObservableObject
 {
     private readonly IServiceProvider _sp;
     private readonly ContactServices _contactService;
-
+    private readonly ContactUpdateViewModel _contactUpdateViewModel;
     [ObservableProperty]
     private ObservableCollection<Contacts> _contactList = [];
+    
+    private readonly ContactPersonViewModel _contactPersonViewModel;
 
-    public ContactListViewModel(IServiceProvider sp, ContactServices contactService)
+    public ContactListViewModel(IServiceProvider sp, ContactServices contactService, ContactUpdateViewModel contactUpdateViewModel, ContactPersonViewModel contactPersonViewModel)
     {
         _sp = sp;
         _contactService = contactService;
-
+        _contactPersonViewModel = contactPersonViewModel;
         ContactList = _contactService.GetAll();
-
+        _contactUpdateViewModel = contactUpdateViewModel;
     }
     //Försök att läggga denna i en ny vy
     [RelayCommand]
-    public void ShowContact(string email)
+    public void ShowContact(Contacts contact)
     {
-        if(email != null)
-        {
-            ContactList = new ObservableCollection<Contacts>(_contactService.ViewOneContact(email));
-        }
+        // Visa detaljer om den valda kontakten i ContactPersonViewModel
+        _contactPersonViewModel.ShowContactOnViewList(contact);
+
+        // Byt vyn till ContactPersonViewModel
+        var mainViewModel = _sp.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = _contactPersonViewModel;
     }
 
     [RelayCommand]
     public void SaveFileToFolder()
     {
         _contactService.SaveToFileOnComp(ContactList);
+        GetContactsFromFile();
     }
 
     [RelayCommand]
@@ -67,8 +72,17 @@ public partial class ContactListViewModel : ObservableObject
     [RelayCommand]
     public void UpdateContact(Contacts contact)
     {
-        var mainViewModel = _sp.GetRequiredService<MainViewModel>();
-        mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactUpdateViewModel>();
+        if (contact != null)
+        {
+            var mainViewModel = _sp.GetRequiredService<MainViewModel>();
+            mainViewModel.CurrentViewModel = _contactUpdateViewModel;
+
+            // Överför befintliga uppgifter till ContactUpdateViewModel
+            _contactUpdateViewModel.Initialize(contact);
+
+            // Uppdatera CurrentViewModel i MainViewModel
+            mainViewModel.CurrentViewModel = _contactUpdateViewModel;
+        }
     }
-    
+
 }
