@@ -15,14 +15,15 @@ public class ContactServices
     private readonly FileService _fileService = new FileService(@"C:\Projects\ContactBookWpf\content.json");
 
     private List<Contacts> _contactList = [];
-    
 
-    public void AddContact(Contacts contacts)
+    public Contacts CurrentContact { get; set; } = null!;
+
+    public void AddContact(Contacts contact)
     {
         
-        if (!string.IsNullOrWhiteSpace(contacts.FirstName))
+        if (!string.IsNullOrWhiteSpace(contact.FirstName))
         {
-            _contactList.Add(contacts);
+            _contactList.Add(contact);
             
         }
     }
@@ -58,16 +59,21 @@ public class ContactServices
 
         _fileService.SaveContentToFile(JsonConvert.SerializeObject(contacts, settings));
     }
-    public ObservableCollection<Contacts> GetAll()
+    //public ObservableCollection<Contacts> GetAll()
+    //{
+    //    ObservableCollection<Contacts> contacts = new();
+
+    //    foreach (var contact in _contactList)
+    //    {
+    //        contacts.Add(contact);
+    //    }
+
+    //    return contacts;
+    //}
+
+    public IEnumerable<Contacts> GetAll()
     {
-        ObservableCollection<Contacts> contacts = new();
-
-        foreach (var contact in _contactList)
-        {
-            contacts.Add(contact);
-        }
-
-        return contacts;
+        return _contactList;
     }
     
 
@@ -91,5 +97,22 @@ public class ContactServices
             }
         }
         return contacts;
+    }
+     public void UpdateContact(Contacts contact)
+    {
+        var myContact = _contactList.FirstOrDefault(x =>  x.Id == contact.Id);
+        if (myContact != null) 
+        {
+            myContact = contact;
+        }
+    }
+
+    public void RemoveContact(Contacts contacts)
+    {
+        var contact = _contactList.FirstOrDefault(x => x.Id == contacts.Id);
+        if (contact != null)
+        {
+            _contactList.Remove(contact);
+        }
     }
 }

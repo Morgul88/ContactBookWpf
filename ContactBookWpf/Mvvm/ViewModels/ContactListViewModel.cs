@@ -13,44 +13,42 @@ public partial class ContactListViewModel : ObservableObject
 {
     private readonly IServiceProvider _sp;
     private readonly ContactServices _contactService;
-    private readonly ContactUpdateViewModel _contactUpdateViewModel;
-    [ObservableProperty]
-    private ObservableCollection<Contacts> _contactList = [];
-    
-    private readonly ContactPersonViewModel _contactPersonViewModel;
 
-    public ContactListViewModel(IServiceProvider sp, ContactServices contactService, ContactUpdateViewModel contactUpdateViewModel, ContactPersonViewModel contactPersonViewModel)
+
+    [ObservableProperty]
+    private Contacts _contactForm = new();
+
+    public ContactListViewModel(IServiceProvider sp, ContactServices contactService)
     {
         _sp = sp;
         _contactService = contactService;
-        _contactPersonViewModel = contactPersonViewModel;
-        ContactList = _contactService.GetAll();
-        _contactUpdateViewModel = contactUpdateViewModel;
+        
+        ContactList = new ObservableCollection<Contacts>(_contactService.GetAll());
+        
     }
-    //Försök att läggga denna i en ny vy
+
     [RelayCommand]
     public void ShowContact(Contacts contact)
     {
-        // Visa detaljer om den valda kontakten i ContactPersonViewModel
-        _contactPersonViewModel.ShowContactOnViewList(contact);
-
-        // Byt vyn till ContactPersonViewModel
+        _contactService.CurrentContact = contact;
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
-        mainViewModel.CurrentViewModel = _contactPersonViewModel;
+        mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactPersonViewModel>();
     }
+    [ObservableProperty]
+    private ObservableCollection<Contacts> contactList = [];
 
     [RelayCommand]
     public void SaveFileToFolder()
     {
         _contactService.SaveToFileOnComp(ContactList);
-        GetContactsFromFile();
+        ContactList = new ObservableCollection<Contacts>(_contactService.GetAll());
     }
 
     [RelayCommand]
     public void GetContactsFromFile()
     {
         _contactService.GetFileFromComp();
-        ContactList = _contactService.GetAll();
+        ContactList = new ObservableCollection<Contacts>(_contactService.GetAll());
     }
 
     [RelayCommand]
@@ -62,27 +60,18 @@ public partial class ContactListViewModel : ObservableObject
     [RelayCommand]
     public void RemoveContact(Contacts contact)
     {
-        if (contact != null!)
-        {
-            ContactList.Remove(contact);
-           
-        }
-        
+        _contactService.RemoveContact(contact);
+        ContactList = new ObservableCollection<Contacts>(_contactService.GetAll());
     }
     [RelayCommand]
     public void UpdateContact(Contacts contact)
     {
-        if (contact != null)
-        {
-            var mainViewModel = _sp.GetRequiredService<MainViewModel>();
-            mainViewModel.CurrentViewModel = _contactUpdateViewModel;
+        
+        _contactService.CurrentContact = contact;
 
-            // Överför befintliga uppgifter till ContactUpdateViewModel
-            _contactUpdateViewModel.Initialize(contact);
+        var mainViewModel = _sp.GetRequiredService<MainViewModel>();
+        mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactUpdateViewModel>();
 
-            // Uppdatera CurrentViewModel i MainViewModel
-            mainViewModel.CurrentViewModel = _contactUpdateViewModel;
-        }
     }
 
 }

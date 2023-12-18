@@ -14,30 +14,26 @@ public partial class ContactUpdateViewModel: ObservableObject
     private readonly IServiceProvider _sp;
     private readonly ContactServices _contactService;
 
+
     [ObservableProperty]
     private Contacts _contactForm = new();
     public ContactUpdateViewModel(IServiceProvider sp,ContactServices contactServices)
     {
         _sp = sp;
-
         _contactService = contactServices;
+        ContactForm = _contactService.CurrentContact;
+
     }
-    
-    
-    
+
+
     [RelayCommand]
     public void GoToList()
     {
+        _contactService.UpdateContact(ContactForm);
         var mainViewModel = _sp.GetRequiredService<MainViewModel>();
         mainViewModel.CurrentViewModel = _sp.GetRequiredService<ContactListViewModel>();
     }
-    public void Initialize(Contacts existingContact)
-    {
-        ContactForm = existingContact;
-    }
-    
-    
-    
+
     
 }
 

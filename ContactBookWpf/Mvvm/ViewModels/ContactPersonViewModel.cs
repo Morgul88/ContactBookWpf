@@ -12,21 +12,21 @@ namespace ContactBookWpf.Mvvm.ViewModels;
 public partial class ContactPersonViewModel: ObservableObject
 {
     
-    [ObservableProperty]
-    private ObservableCollection<Contacts> _secondList = [];
     
     private readonly ContactServices _contactService;
 
     private readonly IServiceProvider _sp;
 
+    [ObservableProperty]
+    private Contacts _contactForm = new();
     public ContactPersonViewModel(IServiceProvider sp, ContactServices contactServices)
     {
         _sp = sp;
         _contactService = contactServices;
+        ContactForm = _contactService.CurrentContact;
         
-
-
     }
+
     [RelayCommand]
     public void NavigateToList()
     {
@@ -36,12 +36,7 @@ public partial class ContactPersonViewModel: ObservableObject
         
     }
     
-    [RelayCommand]
-    public void ShowContactOnViewList(Contacts contact)
-    {
-        SecondList.Clear(); // Rensa listan innan du lägger till den nya kontakten
-        SecondList.Add(contact); // Lägg till den valda kontakten
-    }
+    
 
 
 

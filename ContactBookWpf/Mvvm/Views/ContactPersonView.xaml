@@ -4,7 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:viewmodels="clr-namespace:ContactBookWpf.Mvvm.ViewModels"
-             xmlns:models="clr-namespace:CommunityToolkit.Mvvm.ComponentModel;assembly=CommunityToolkit.Mvvm"
+             xmlns:models="clr-namespace:ContactBookWpf.Mvvm.Models"
              d:DataContext="{d:DesignInstance Type=viewmodels:ContactPersonViewModel}"
              xmlns:local="clr-namespace:ContactBookWpf.Mvvm.Views"
              mc:Ignorable="d" 
@@ -17,27 +17,31 @@
         </Grid.RowDefinitions>
 
         <StackPanel Grid.Row="1">
-            <Label Content="Information" FontWeight="Bold" FontSize="20"/>
-            <ListView ItemsSource="{Binding SecondList}" Margin="5,5,5,0" HorizontalContentAlignment="Stretch">
+           
+            <Label Content="Person Information:" FontWeight="Bold" FontSize="20" Background="White" Margin="0,20,0,0"/>
+            <Border BorderBrush="Black" BorderThickness="1" Padding="0" Margin="0">
+                <StackPanel Grid.Row="0" Margin="0,0,0,20" Background="white">
 
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <StackPanel Grid.Column="0" Margin="5" HorizontalAlignment="Left">
-                            <TextBlock Text="Hejjjjjjjjj"/>
-                            <TextBlock Text="{Binding FirstName}" FontWeight="Bold" />
-                            <TextBlock Text="{Binding LastName}" FontWeight="Bold"/>
-                            <TextBlock Text="{Binding PhoneNumber}" />
-                            <TextBlock Text="{Binding HomeAdress}" />
-                            <TextBlock Text="{Binding Id}"/>
-                            <TextBlock Text="{Binding InformationPerson}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                    <Label Content="First Name:"  FontSize="15px" FontWeight="Bold" Background="LightGray" Margin="0,10,0,0"/>
+                    <TextBlock x:Name="Input_Name" Text="{Binding ContactForm.FirstName}" Padding="8" Margin="0,0,0,5"  />
+                    <Label Content="Last Name:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.LastName}" Padding="8" Margin="0,0,0,10" />
+                    <Label Content="Phone:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.PhoneNumber}" Padding="8" Margin="0,0,0,10"/>
+                    <Label Content="E-Mail:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.Email}" Padding="8" Margin="0,0,0,10"/>
+                    <Label Content="Adress:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.HomeAdress}" Padding="8" Margin="0,0,0,10"/>
+                    <Label Content="Id:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.Id}" Padding="8" Margin="0,0,0,10"/>
+                    <Label Content="Information:"  FontSize="15px" FontWeight="Bold" Background="LightGray"/>
+                    <TextBlock Text="{Binding ContactForm.InformationPerson}" Padding="8" Margin="0,0,0,10"/>
+                </StackPanel>
+            </Border>
+           
         </StackPanel>
         <StackPanel Grid.Row="0">
-            <Button Command="{Binding NavigateToListCommand}" Content="Navigate to List" Margin="5,60,5,0" Height="30"/>
-           
+            <Button Command="{Binding NavigateToListCommand}" Content="Navigate to List" Margin="5,0,5,0" Height="30" Background="LightBlue"/>
         </StackPanel>
     </Grid>
 </UserControl>
