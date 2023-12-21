@@ -10,6 +10,9 @@ using System.Diagnostics.Contracts;
 
 namespace ContactBookWpf.Mvvm.Services;
 
+/// <summary>
+/// ContactServices där alla mina metoder ligger:
+/// </summary>
 public class ContactServices
 {
     private readonly FileService _fileService = new FileService(@"C:\Projects\ContactBookWpf\content.json");
@@ -18,6 +21,10 @@ public class ContactServices
 
     public Contacts CurrentContact { get; set; } = null!;
 
+    /// <summary>
+    /// Stoppar in en kontakt. Om strängen inte har whitespaces eller inteär null så läggs kontakten till i listan.
+    /// </summary>
+    /// <param name="contact"></param>
     public void AddContact(Contacts contact)
     {
         
@@ -27,7 +34,10 @@ public class ContactServices
             
         }
     }
-    
+
+    /// <summary>
+    /// Hämtar information från en fil på datorn och fyller kontaktlistan med deserialiserade kontakter.
+    /// </summary>
     public void GetFileFromComp()
     {
         
@@ -50,6 +60,10 @@ public class ContactServices
 
        
     }
+    /// <summary>
+    /// Sparar min listas som en fil på datorn.
+    /// </summary>
+    /// <param name="contacts"></param>
     public void SaveToFileOnComp(ObservableCollection<Contacts> contacts)
     {
         var settings = new JsonSerializerSettings
@@ -59,6 +73,7 @@ public class ContactServices
 
         _fileService.SaveContentToFile(JsonConvert.SerializeObject(contacts, settings));
     }
+
     //public ObservableCollection<Contacts> GetAll()
     //{
     //    ObservableCollection<Contacts> contacts = new();
@@ -71,6 +86,10 @@ public class ContactServices
     //    return contacts;
     //}
 
+    /// <summary>
+    /// Returnerar min lista _contactList
+    /// </summary>
+    /// <returns> returnerar listsan </returns>
     public IEnumerable<Contacts> GetAll()
     {
         return _contactList;
@@ -78,11 +97,15 @@ public class ContactServices
     
 
 
-
+    /// <summary>
+    /// Letar upp en kontakt genom email. Sen lägger till de från listan i ett nytt objekt
+    /// </summary>
+    /// <param name="mail"></param>
+    /// <returns>Returnerar den nya kontakten</returns>
     public ObservableCollection<Contacts> ViewOneContact(string mail)
     {
         
-        // Antagande: _contactList är en lista av Contact-objekt
+        
         var findContacts = _contactList.FindAll(x => x.Email == mail.Trim());
         ObservableCollection<Contacts> contacts = new();
         if (findContacts.Count > 0) 
@@ -98,6 +121,12 @@ public class ContactServices
         }
         return contacts;
     }
+
+    /// <summary>
+    /// Stoppar in en contact och letar i listan efter contakt med hjälp utav id.
+    /// Om vi hittar en kontakt så ersätter vi den gamla kontakten med den nya
+    /// </summary>
+    /// <param name="contact"></param>
      public void UpdateContact(Contacts contact)
     {
         var myContact = _contactList.FirstOrDefault(x =>  x.Id == contact.Id);
@@ -107,6 +136,10 @@ public class ContactServices
         }
     }
 
+    /// <summary>
+    /// Stoppar in en kontakt. letar upp ID. Tar kontakten från listan.
+    /// </summary>
+    /// <param name="contacts"></param>
     public void RemoveContact(Contacts contacts)
     {
         var contact = _contactList.FirstOrDefault(x => x.Id == contacts.Id);

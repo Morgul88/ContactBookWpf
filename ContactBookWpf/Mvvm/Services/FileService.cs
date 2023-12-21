@@ -4,16 +4,26 @@ using System.IO;
 
 namespace ContactBookWpf.Mvvm.Services;
 
+/// <summary>
+/// Fileservice klass. Hanterar min filservice
+/// </summary>
 public class FileService
 {
     private readonly string _filePath;
 
+    /// <summary>
+    /// Konstruktor för FileService
+    /// </summary>
+    /// <param name="filePath"></param>
     public FileService(string filePath)
     {
         _filePath = filePath;
     }
 
-
+    /// <summary>
+    /// Tar fil från datorn och läser fil genom Streamreader
+    /// </summary>
+    /// <returns></returns>
     public string GetContentFromFile()
     {
         try
@@ -29,6 +39,12 @@ public class FileService
         catch (Exception ex) { Debug.WriteLine(ex.Message); }
         return null!;
     }
+
+    /// <summary>
+    /// Skapar en fil på min dator genom StreamWriter
+    /// </summary>
+    /// <param name="content"></param>
+    /// <returns></returns>
     public bool SaveContentToFile(string content)
     {
 
