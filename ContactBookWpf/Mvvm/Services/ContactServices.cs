@@ -25,14 +25,15 @@ public class ContactServices
     /// Stoppar in en kontakt. Om strängen inte har whitespaces eller inteär null så läggs kontakten till i listan.
     /// </summary>
     /// <param name="contact"></param>
-    public void AddContact(Contacts contact)
+    public bool AddContact(Contacts contact)
     {
         
         if (!string.IsNullOrWhiteSpace(contact.FirstName))
         {
             _contactList.Add(contact);
-            
+            return true;
         }
+        return false;
     }
 
     /// <summary>

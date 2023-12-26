@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34309.116
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBookWpf", "ContactBookWpf\ContactBookWpf.csproj", "{C39F2B4A-D3B3-43B2-A5E0-D9ED1E2B315C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ContactBookWpf", "ContactBookWpf\ContactBookWpf.csproj", "{C39F2B4A-D3B3-43B2-A5E0-D9ED1E2B315C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ContactBookWpf.Tests", "ContactBookWpf.Tests\ContactBookWpf.Tests.csproj", "{0BCC2399-6853-4A00-87F4-8CAABD7082AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{C39F2B4A-D3B3-43B2-A5E0-D9ED1E2B315C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C39F2B4A-D3B3-43B2-A5E0-D9ED1E2B315C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C39F2B4A-D3B3-43B2-A5E0-D9ED1E2B315C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0BCC2399-6853-4A00-87F4-8CAABD7082AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0BCC2399-6853-4A00-87F4-8CAABD7082AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0BCC2399-6853-4A00-87F4-8CAABD7082AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0BCC2399-6853-4A00-87F4-8CAABD7082AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
