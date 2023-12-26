@@ -15,6 +15,8 @@ namespace ContactBookWpf.Mvvm.Services;
 /// </summary>
 public class ContactServices
 {
+    //github test
+
     private readonly FileService _fileService = new FileService(@"C:\Projects\ContactBookWpf\content.json");
 
     private List<Contacts> _contactList = [];
